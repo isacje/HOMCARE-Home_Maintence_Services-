@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login1</title>
-    <link rel="stylesheet" href="static/style/login1.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
-    <form class="form">
+    <form class="LoginForm" action="{% url 'authenticate' %}"  method="post">
+        {% csrf_token %}
         <div class="head">
             <h2 id="head1" style="font-weight: bolder;">Welcome back,</h2>
         </div>
@@ -19,10 +20,10 @@
         </div>
         <div class="mega">
             <div class="input-container">
-                <input type="email" placeholder="user email / clientID">
+                <input type="text" placeholder="email" name="user_email">
             </div>
             <div class="input-container">
-               <input type="password" placeholder="password">
+               <input type="password" placeholder="password" name="user_password">
             </div>
             <div class="checkbox-wrapper-65">
                 <label for="cbk1-65">
@@ -39,9 +40,8 @@
                 <p>Not having an account? Start creating an account to explore all the features.</p>
             </div>
             <div class="container">
-                <button type="button" class="submit" style="margin-top: 10px;margin-right: 15px;">Sign in</button>
-                <a href="{% url 'signup' %}"><button type="button" class="create" style="margin-top: 10px;margin-left: 15px;">Create account</button></a> 
-                
+                <input type="submit" value="Sign in" style="margin-top: 10px;margin-right: 20px;"/>
+                <a href="{% url 'signup' %}"><button type="button" class="create" style="margin-top: 10px;margin-left: 20px;">Create account</button></a>
             </div>
         </div>
     </form> 
