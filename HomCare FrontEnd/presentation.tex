@@ -1,0 +1,829 @@
+\documentclass{beamer} % Beamer document class for presentations
+\usetheme[secheader]{Boadilla} % Theme for the presentation
+\setbeamertemplate{navigation symbols}{} % Remove navigation symbols
+\usepackage{tcolorbox} % For colored boxes and text
+\usepackage{tikz} % For drawing graphics and diagrams
+\usepackage{mwe} % For including example pictures (used in this document)
+\usepackage{siunitx} % For typesetting SI units
+\usepackage{hyperref} % For hyperlinks
+%\usepackage[table]{xcolor} % For coloring tables
+% Additional packages for TikZ and related features
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usecolortheme{spruce}
+\usepackage{colortbl} % For colored cells in tables
+\usepackage{xcolor} % For defining custom colors
+\usepackage{graphicx} % For \cellcolor command
+\usetikzlibrary{positioning, arrows.meta} % Additional TikZ libraries for positioning and arrow styles
+\usepackage{color} % For custom color definitions
+\usepackage{epsfig} % For EPS figures
+\usepackage{ifpdf} % For conditional checks based on output format
+\usepackage[latin1]{inputenc} % Input encoding
+\usepackage{multimedia} % For including multimedia elements in presentations
+
+% Define custom colors
+\definecolor{Mahogany}{cmyk}{0,0.85,0.87,0.35}
+\definecolor{Mahogany}{RGB}{43,117,22}
+
+% Additional packages for mathematical typesetting and symbols
+\usepackage{latexsym}
+\usepackage{amsmath,amsthm,amssymb} % For mathematical environments and symbols
+\usepackage{mathrsfs} % For additional math fonts
+
+\usepackage{listings} % For typesetting code
+\usepackage{xcolor}   % For customizing colors
+
+% Define colors for code highlighting
+\definecolor{mygreen}{rgb}{128, 128, 128}
+\definecolor{mygray}{RGB}{128,128,128}
+\definecolor{mymauve}{RGB}{211,211,211}
+
+% Define the style for Python code
+\lstset{
+  language=Python,
+  basicstyle=\normalsize\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{mygreen},
+  numberstyle=\tiny\color{mygray},
+  stringstyle=\color{mymauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  %numbers=left,
+  frame=single,
+  showstringspaces=false,
+  captionpos=b,
+}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
+
+
+\newtheorem{thm}{Theorem}
+%\newtheorem{def}{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{prop}{Properties of Green's function}
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\newtheorem{open}{Open Problem}
+\newtheorem{rem}{Remarks}
+\newtheorem{ex}{Example}
+\newtheorem{arity}{Arity}
+\newtheorem{valence}{Valence}
+\newtheorem{regular}{Regular and Irregular Vertex }
+\newtheorem{inter}{Interpolating subdivision scheme}
+\newtheorem{apx}{Approximating subdivision scheme}
+\newtheorem{depth}{Subdivision depth}
+\newtheorem{binary}{Binary subdivision scheme}
+\newtheorem{ter}{Ternary subdivision scheme}
+\newtheorem{qua}{Quaternary subdivision scheme}
+\newtheorem{binsur}{Binary subdivision surface}
+\newtheorem{tersur}{Ternary subdivision surface}
+\newtheorem{quasur}{Quaternary subdivision surface}
+\newtheorem{narysur}{n-ary subdivision surface}
+\newtheorem{nonstat}{Non-stationary subdivision scheme}
+\newtheorem{nonstatcurve}{Binary non-stationary subdivision curve}
+\newtheorem{nonstatsur}{Binary non-stationary subdivision surface}
+\newtheorem{binvol}{Binary volumetric model}
+\newtheorem{naryvol}{n-ary volumetric model}
+\newtheorem{tri}{Triangular subdivision scheme}
+\newtheorem{defn}{Definition}
+\newtheorem{prf}{Proof}
+\newtheorem{conclusion}{Conclusion}
+\newtheorem{sol}{Solution}
+
+\definecolor{darkgreen}{rgb}{0,0.7,0}
+\ifpdf
+  \DeclareGraphicsExtensions{.png,.pdf}
+\else
+  \DeclareGraphicsExtensions{.eps}
+\fi
+
+
+
+%%%%%%%%%%%%%%%%%%%%%% title page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Set the short title for the presentation (appears in the header)
+\title[\textcolor{red}{}]{\textbf{HOME MAINTENANCE SERVICES}}
+% Set the author information with a colored name (appears in the footer)
+\author[\textcolor{white}{}]{\textcolor{black}{PROJECT DOMAIN : WEB DEVELOPMENT}{\textcolor{red}{\newline Project Guide : Dr. Reshmi R \newline Abhimanue S (FIT21CS003)\newline Antony J Chiriyath (FIT21CS038) \newline Ditto V Jaison (FIT21CS047) \newline Isac John Eralil (FIT21CS063)}}}
+\vspace{0.5cm}
+%\large{Supervised by
+%\textbf{PROJECT DOMAIN : WEB DEVELOPMENT}}}
+% Define a command to set the frame author (date in this case)
+\newcommand{\frameauthor}[1]{\date{#1}}
+
+% Set the institute information with a colored short university name (appears in the footer)
+% \institute[\textcolor{white}{Short University Name}]{
+% Your Department Name
+%Your Faculty Name\\
+%Your Institute Name}
+
+% Set the date of the presentation (today's date in this case)
+\date{\today}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%% end title page %%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\AtBeginSubsection[] {
+  \begin{frame}<beamer>
+%    \frametitle{Abstract}
+    \tableofcontents[currentsection,currentsection]
+  \end{frame}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% zaciname
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%{\footnotesize{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}
+%\includegraphics[width=\linewidth]{}
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \titlepage
+  
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}\frametitle{Outline}
+%   \tableofcontents[hideallsubsections \small]
+
+% \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{\textbf{Overview}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{blue}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+%       
+%   \end{frame}
+\begin{frame}{Introduction}
+    Our project aims to address these needs by providing an online platform that transforms the way house maintenance services are delivered and accessed. Through this platform, we seek to enhance the overall experience for homeowners, contractors, and service providers, making the construction journey smoother, more efficient, and more enjoyable.
+    
+   % \textbf{Examples:}
+    
+    \vspace{10pt} % Add vertical space between text and figure
+    \begin{figure}
+        %\begin{minipage}{0.4\textwidth}
+        %    \begin{itemize}
+        %        \item Point 1.
+        %        \item Point 2.
+        %        \item Point 3.
+        %        \item Point 4.
+        %    \end{itemize}
+        %\end{minipage}
+        \hfill
+      %  \begin{minipage}{0.55\textwidth}
+          %  \centering
+           % \begin{tikzpicture}
+                % Axes
+               % \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
+                %\draw[->] (0,-1) -- (0,4) node[above] {$S(y)$};
+                
+                % Graph
+                %\draw[domain=-1.5:1.5,smooth,variable=\x,blue] plot ({\x},{\x*\x});
+                
+                % X-axis values
+               % \foreach \xValue in {-2,-1,0,1,2}
+                   % \draw (\xValue,0.1) -- (\xValue,-0.1) node[below] {$\xValue$};
+                
+                % Y-axis values
+                %\foreach \yValue in {1,2,3}
+                   % \draw (0.1,\yValue) -- (-0.1,\yValue) node[left] {$\yValue$};
+                
+                % Fixed points
+             %   \filldraw[red] (0,0) circle (2pt) node[anchor=north east, red] {0};
+               % \filldraw[red] (1,1) circle (2pt) node[anchor=south east, red] {1};
+                
+                % Straight line through origin and fixed points
+               % \draw[red, line](-1,-1)-- (0,0) -- (2,2);
+                % Fixed points label
+               % \node[red, align=center] at (2,3) {Points:\\$(0, 0)$, $(1, 1)$};
+           % \end{tikzpicture}
+          %  \caption{Graph}
+          %  \label{fig:graph}
+      %  \end{minipage}
+      
+    \end{figure}
+\end{frame}
+
+% \section{\textbf{Problem Statement}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{orange}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+%       
+%   \end{frame}
+
+\begin{frame}{Problem Statement}
+    In the house maintenance industry, it's difficult for homeowners to find all the services they need in one place, leading to confusion and delays.In addition, contractors often struggle to connect with homeowners who need their services, resulting in missed opportunities. By providing a centralized platform for both homeowners and contractors, we can improve communication and collaboration which ultimately deliver better outcomes for everyone involved.
+    
+   % \textbf{Examples:}
+    
+    \vspace{9pt} % Add vertical space between text and figure
+    \begin{figure}
+        \hfill
+    \end{figure}
+    
+\end{frame}
+
+% \section{\textbf{Objective}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{red}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+%       
+%   \end{frame}
+  
+\begin{frame}{Objectives}
+    Our project has several key objectives:\\.
+     \begin{minipage}{1\textwidth}
+            \begin{itemize}
+                \item \\Provide an online platform that offers a wide range of house maintenance services, from initial planning and design to final implementation and aesthetics.
+
+                
+
+                \item Enhance community engagement by facilitating communication, knowledge-sharing, and collaboration among homeowners, contractors, and service providers.
+
+                \item Our project aims to address the time challenge by providing a centralized platform that streamlines the construction process, reducing delays and ensuring timely project completion.
+            \end{itemize}
+        \end{minipage}
+    
+   % \textbf{Examples:}
+    
+    \vspace{10pt} % Add vertical space between text and figure
+    \begin{figure}
+        \hfill
+    \end{figure}
+\end{frame}
+
+% \section{\textbf{Purpose}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{red}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+%       
+%   \end{frame}
+  
+\begin{frame}{Purpose}
+    
+                Creating a centralized platform for homeowners and contractors in the house maintenance industry addresses the challenge of scattered services, enhancing efficiency and reducing delays. By facilitating communication and collaboration, this platform aims to streamline processes and optimize outcomes for both parties involved.It also provides homeowners to licensed and authorised experts in each field of work.
+    
+   % \textbf{Examples:}
+    
+    \vspace{10pt} % Add vertical space between text and figure
+    \begin{figure}
+        \hfill
+    \end{figure}
+    
+\end{frame}
+
+% \section{\textbf{Scope}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{red}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+%       
+%   \end{frame}
+  
+\begin{frame}{Scope}
+    
+                The scope of creating a our project is that it helps facilitate homeowners in connecting with authorized and licensed professionals for home maintenance and renovation encompasses providing a user-friendly interface for homeowners to easily search, contact, and engage with a diverse range of skilled professionals. Additionally, the website should offer features such as reviews, ratings, and verified credentials to ensure reliability and trustworthiness in the selection process.
+    
+   % \textbf{Examples:}
+    
+    \vspace{10pt} % Add vertical space between text and figure
+    \begin{figure}
+        \hfill
+    \end{figure}
+\end{frame}
+% \section{\textbf{Scope}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{red}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+%       
+%   \end{frame}
+  
+
+
+% \section{\textbf{Social Relevance}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{red}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+%       
+%   \end{frame}
+  
+\begin{frame}{Social Relevance}
+    The social relevance of our project is:\\.
+     \begin{minipage}{1\textwidth}
+            \begin{itemize}
+                \item \\Enhancing accessibility ensures all homeowners can find reliable contractors regardless of their resources or networks.
+
+                \item Connecting with licensed professionals promotes safety standards and compliance with regulations.
+
+                \item Facilitating connections stimulates economic activity and job creation within the sector.
+
+                \item Bringing homeowners and professionals together fosters community engagement and knowledge sharing.
+
+                \item Promoting maintenance and renovation contributes to environmental sustainability through energy efficiency and eco-friendly practices.
+            \end{itemize}
+        \end{minipage}
+   % \textbf{Examples:}
+    
+    \vspace{10pt} % Add vertical space between text and figure
+    \begin{figure}
+        \hfill
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Software Requirement Specification}
+         \underline\h{ FUNCTIONAL REQUIREMENTS}
+       \begin{itemize}
+        \small\item User registration and login system for homeowners and service providers.
+        \small\item Service listing and search functionality to browse and find house maintenance     services.
+        \small\item Booking and scheduling system for appointments and project timelines.
+        \small\item Secure payment processing for transactions between users.
+        \br
+        \end{itemize}
+        \underline\h{ NON-FUNCTIONAL REQUIREMENTS}
+        \begin{itemize}       
+        \small\item Performance: The platform will be responsive and able to handle multiple users concurrently without significant slowdowns.
+        \small\item Reliability: The platform should be reliable, with minimal downtime and the ability to recover from failures quickly.
+        \small\item Usability: The user interface should be intuitive and user-friendly, catering to users with varying levels of technical proficiency.
+        \end{itemize}
+        
+   % \textbf{Examples:}
+    
+    \vspace{10pt} % Add vertical space between text and figure
+    \begin{figure}
+        \hfill
+    \end{figure}
+\end{frame}
+% \section{\textbf{System Architecture}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{blue}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+%       
+%   \end{frame}
+   
+\begin{frame}{System Architecture}
+    \begin{itemize}
+
+        \begin{figure}[H]
+    %\begin{minipage}{0.4\textwidth}
+      %  \centering
+\includegraphics[scale=0.5]{Screenshot 2024-03-22 003043.png}
+\item[System architecture of house maintenance service website.] 
+    %\end{minipage}%
+    
+\end{figure}
+    
+    \end{itemize}
+\end{frame}
+
+% \section{\textbf{Softwares Used4}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{orange}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+%   \end{frame}
+
+\begin{frame}{Application Architecture Design}
+    % The various softwares that we used to develop this website are:\\.
+    \begin{minipage}{1\textwidth}
+            \begin{itemize}
+                \item \\HTTP/HTTPS: Utilize the Hypertext Transfer Protocol (HTTP) or its secure variant (HTTPS) for communication between the client (browser) and the server. This ensures data integrity and security during transmission.
+                \item Responsive Web Design: Design the user interface to be responsive, adapting to various screen sizes and devices (desktops, laptops, tablets, smartphones). Utilize CSS media queries and flexible layouts to achieve responsiveness.  
+                \item Version Control: Use version control systems (e.g., Git) to manage changes to the front-end codebase, enable collaboration among developers, and track the history of modifications. Follow best practices for branching, merging, and commit messages.
+            \end{itemize}
+        \end{minipage}
+        
+\end{frame}
+
+
+
+\begin{frame}{GUI Design}
+    \vspace{5pt} % Add vertical space between text and figure
+    \begin{figure}
+    
+        \includegraphics[scale=0.3]{WhatsApp Image 2024-04-15 at 22.53.53_d505b5cd.jpg}
+    \end{figure}
+    
+\end{frame}
+
+\begin{frame}{GUI Design}
+    \vspace{5pt} % Add vertical space between text and figure
+    \begin{figure}
+    
+        \includegraphics[scale=0.3]{WhatsApp Image 2024-04-15 at 23.16.27_c3cbb6f2.jpg}
+    \end{figure}
+    
+\end{frame}
+
+% \begin{frame}{API Design}
+%     \vspace{5pt} % Add vertical space between text and figure
+%     \begin{figure}
+    
+%         \includegraphics[scale=0.3]{}
+%     \end{figure}
+    
+% \end{frame}
+
+\begin{frame}{Database Design}
+For the Website, sqlite3 serves as the database management system
+due to its reliability and scalability. The database design includes:
+    \vspace{5pt} % Add vertical space between text and figure
+    \begin{itemize}
+        \item New User table:Fields: email(Unique constraint), username, password, phoneNo, userType, etc.
+        \item Service Provider table:Fields: clientID(primary key), companyName ,ownerName, pan(unique constraint), etc.
+        \item Client table: Fields: userID(primary key), address
+        \item Section table: Fields: sectionID(primary key), title, rate, employeeCount, etc.
+    \end{itemize}
+    
+\end{frame}
+
+
+\begin{frame}{Technology Stack}
+    The various software's that we used to develop this website are:\\.
+    \begin{minipage}{1\textwidth}
+            \begin{itemize}
+                \item \\VS Code
+                \item Django
+                \item HTML
+                \item CSS
+                \item JavaScript
+                \item sqlite3
+            \end{itemize}
+        \end{minipage} 
+\end{frame}
+
+\begin{frame}[c]{Use Case Diagram}	
+\begin{usecase}
+	\includegraphics[scale=0.35]{WhatsApp Image 2024-03-21 at 21.38.06_232fdd5f.jpg}
+ %\item[Use Case Diagram of Home Maintenance Services Website.] 
+ 
+\end{usecase}
+\end{frame}	
+
+% \begin{frame}{Algorithms/Procedures}
+%     \begin{minipage}{1\textwidth}
+%             \begin{itemize}
+               
+%             \end{itemize}
+%         \end{minipage} 
+% \end{frame}
+
+% \section{\textbf{Implementation}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{red}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+%       
+%   \end{frame}
+  
+\begin{frame}[c]{Project Plan}
+	
+The works are divided as follow
+\begin{block}{Front-End Development}
+	Front-end of the website is designed by Antony J Chiryath and Isac John Eralil.
+\end{block}
+
+\begin{exampleblock}{Back-End Development}
+	The back-end operations of the website is developed by Abhimanue S and Ditto V Jaison
+\end{exampleblock}
+
+\begin{alertblock}{Database Linking}
+	Linking the website to the database to store the information of the client using SQL in Django.
+\end{alertblock}
+
+\end{frame}
+
+\begin{frame}{Coding standards, Environment Setup & Source Code Control Setup}
+    Python (Django):
+    \begin{minipage}{1\textwidth}
+            \begin{itemize}
+\item Follow the PEP 8 style guide for Python code, including naming conventions, indentation, and code formatting.
+\item Use Django's coding style conventions for Django-specific code, such as model, view, and URL naming.
+            \end{itemize}
+Database (sqlite3):
+\begin{itemize}
+    \item Adhere to Django's database best practices for defining models, queries, and migrations.
+\end{itemize}
+JavaScript:
+\begin{itemize}
+    \item Follow JavaScript Standard Style for JavaScript code, including variable naming conventions, indentation, and code formatting.
+\end{itemize}
+        \end{minipage} 
+\end{frame}
+
+% \begin{frame}{Unit testing}
+    
+%     \begin{minipage}{1\textwidth}
+%             \begin{itemize}
+               
+%             \end{itemize}
+%         \end{minipage} 
+% \end{frame}
+
+% \begin{frame}{Integration testing}
+%     \begin{minipage}{1\textwidth}
+%             \begin{itemize}
+               
+%             \end{itemize}
+%         \end{minipage} 
+% \end{frame}
+
+% \begin{frame}{Functional testing}
+%     \begin{minipage}{1\textwidth}
+%             \begin{itemize}
+               
+%             \end{itemize}
+%         \end{minipage} 
+% \end{frame}
+
+% \begin{frame}{Load testing}
+%     \begin{minipage}{1\textwidth}
+%             \begin{itemize}
+               
+%             \end{itemize}
+%         \end{minipage} 
+% \end{frame}
+
+% \begin{frame}{Bug report and Resolutions}
+%     \begin{minipage}{1\textwidth}
+%             \begin{itemize}
+               
+%             \end{itemize}
+%         \end{minipage} 
+% \end{frame}
+
+% \begin{frame}{Deployment}
+%     \begin{minipage}{1\textwidth}
+%             \begin{itemize}
+               
+%             \end{itemize}
+%         \end{minipage} 
+% \end{frame}
+
+\begin{frame}{Project Status}
+        \begin{itemize}
+            \item Antony J Chiriyath : Designed and developed login pages
+            \item Isac John Eralil : Designed and developed the home page and each individual webpage.
+            \item Ditto V Jaison :Designed databases using sqlite3
+            \item Abhimanue S : Designed the various backend models using Djangoa dn created the service provider registration page.
+        \end{itemize}
+    
+   % \textbf{Examples:}
+    
+    \vspace{10pt} % Add vertical space between text and figure
+    \begin{figure}
+        \hfill
+    \end{figure}
+\end{frame}
+
+
+
+
+
+% \section{\textbf{Screenshots}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title} 
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{red}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+%       
+%   \end{frame}
+% \begin{frame}{Working Model}
+%     \begin{minipage}{1\textwidth}
+%             \begin{itemize}
+               
+%             \end{itemize}
+%         \end{minipage} 
+% \end{frame}
+
+\begin{frame}{Comparison To Presently Available Similar Websites}
+    When comparing our website to other websites that are already available on the interner,ours stands out because:\\.
+     \begin{minipage}{1\textwidth}
+            \begin{itemize}
+                \item \\Encourage community interaction through forums, social features for collaboration.
+
+                \item \\Enforce rigorous vetting to guarantee contractors meet professionalism, licensing, insurance.
+
+                \item \\Emphasize exceptional customer support for prompt issue resolution, fostering trust.
+
+                \item \\Deliver seamless user experiences across devices, easy navigation, quick loading.
+
+            \end{itemize}
+        \end{minipage}
+   % \textbf{Examples:}
+    
+    \vspace{10pt} % Add vertical space between text and figure
+    \begin{figure}
+        \hfill
+    \end{figure}
+    
+\end{frame}
+\begin{frame}{Home Page}
+    \vspace{5pt} % Add vertical space between text and figure
+    \begin{figure}
+    
+        \includegraphics[scale=0.3]{Screenshot 2024-04-16 001011.png}
+    \end{figure}  
+\end{frame}
+
+\begin{frame}{Service Page}
+    \vspace{5pt} % Add vertical space between text and figure
+    \begin{figure}
+    
+        \includegraphics[scale=0.3]{Screenshot 2024-04-16 000604.png}
+    \end{figure}  
+\end{frame}
+
+\begin{frame}{About Page}
+    \vspace{5pt} % Add vertical space between text and figure
+    \begin{figure}
+    
+        \includegraphics[scale=0.3]{Screenshot 2024-04-16 001040.png}
+    \end{figure}  
+\end{frame}
+
+
+\begin{frame}{Login Page}
+    \vspace{5pt} % Add vertical space between text and figure
+    \begin{figure}
+    
+        \includegraphics[scale=0.3]{WhatsApp Image 2024-03-21 at 23.21.29_8718aed4.jpg}
+    \end{figure}
+    
+\end{frame}
+
+\begin{frame}{Sign Up Page}
+    \vspace{5pt} % Add vertical space between text and figure
+    \begin{figure}
+        \includegraphics[scale=0.3]{WhatsApp Image 2024-03-21 at 23.21.29_8fd6b3e9.jpg}
+    \end{figure}
+    
+\end{frame}
+
+\begin{frame}[c]{Sign Up Page}
+	
+\begin{usecase}
+	\includegraphics[scale=0.35]{signup(1)screenshot.png}
+ %\item[Use Case Diagram of Home Maintenance Services Website.] 
+\end{usecase}
+
+\end{frame}	
+
+\begin{frame}{Budget}
+        \item As the project does not requrire any hardware or paid APIs, the only cost
+involved will of hosting the website in any cloud plateform (AWS S3
+buckets)
+    
+   % \textbf{Examples:}
+    
+    \vspace{10pt} % Add vertical space between text and figure
+    \begin{figure}
+        \hfill
+    \end{figure}
+\end{frame}
+% \section{\textbf{Comparison to Similar Websites}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{red}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+%       
+%   \end{frame}
+	
+
+
+% \section{\textbf{References}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{red}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+%       
+%   \end{frame}
+	
+
+
+
+
+% \section{\textbf{Timeline}}
+%     \begin{frame}[plain]
+%         \vfill
+%       \centering
+%       \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%         \usebeamerfont{title}\insertsectionhead\par%
+%         \color{red}\noindent\rule{10cm}{1pt}
+%       \end{beamercolorbox}
+%       \vfill
+      
+%   \end{frame}
+
+  
+\begin{frame}[c]{Project Scheduling}
+    \begin{itemize}
+        \item 05/02/2024: Selected the topic HomCare
+        \item 12/03/2024: Took references.
+        \item 26/03/2024: Made a sample Django project for testing.
+        \item 30/03/2024: Frontend and UI works started
+        \item 03/04/2024: Backend  works were started.
+        \item 07/04/2024:Database design was done.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion}
+In conclusion, the website for home maintenance services offers a comprehensive solution for homeowners seeking reliable assistance with their property upkeep needs. With user-friendly navigation, detailed service listings, and convenient booking options, it serves as a valuable resource for individuals looking to streamline their home maintenance tasks. By providing a platform that connects users with skilled professionals, the website facilitates efficient and effective property management, ultimately enhancing the overall quality and longevity of residential properties.
+    
+\end{frame}
+\begin{frame}{Bibliography}
+    The various websites that we referenced include:\\.
+    \begin{minipage}{1\textwidth}
+            \begin{itemize}
+                \item \\Journal on demand for home services by Forbes:-\color{blue}\url{https://bit.ly/forbes_homeservices}
+                \color{black}\item an online platform contractors and service providers:-\color{blue}\url{https://getjobber.com/}
+                \color{black}\item An online system for household service from BITM, Ballari:-\color{blue}\url{https://bit.ly/BITM_household}
+            \end{itemize}
+        \end{minipage}
+\end{frame}
+
+\section{}
+
+\begin{frame}
+\includegraphics[width=11cm, height=8cm]{Pictures/thankyou.png}
+
+\end{frame}
+
+\end{document}
