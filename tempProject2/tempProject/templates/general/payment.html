@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Price Calculator</title>
+<script>
+    // Function to calculate the payment dynamically
+    function calculatePayment() {
+        // Get the area value entered by the user
+        var area = parseFloat(document.getElementById('area').value);
+        
+        if (isNaN(area)) {
+            // Set the price span to display a blank value
+            document.getElementById('price').innerText = '';
+            return; // Exit the function
+        }
+        // Get the payment per area and rate from the server-side (you may need to fetch these values using AJAX)
+        var employeePerArea = parseFloat(document.getElementById('epa').value);; // Get employeePerArea from the Section object
+        var rate = parseFloat(document.getElementById('rate').value); // Get rate from the Section object
+        
+        // Calculate the payment
+        var payment = employeePerArea * rate * area;
+        
+        // Display the payment dynamically
+        document.getElementById('price').innerText = payment.toFixed(2); // Round to 2 decimal places
+    }
+
+    // Function to handle input event on the area input field
+    function handleInput() {
+        // Calculate payment dynamically when the user inputs a value
+        calculatePayment();
+    }
+</script>
+</head>
+<body>
+<h1>Price Calculator</h1>
+<form id="areaForm" action="{% url 'track' %}">
+    {% csrf_token %}
+    <label for="area">Enter Area (in square feet):</label><br>
+    <input type="hidden" id="epa" name="payment" value="{{ pay.employeePerArea }}">
+    <input type="hidden" id="rate" name="payment" value="{{ pay.rate }}">
+    <input type="number" id="area" name="area" oninput="handleInput()"><br>
+    <label for="price">Price:</label><br>
+    <span id="price"></span><br>
+    <input type="submit" name="Submit">
+</form>
+<label id="priceLabel"></label>
+</body>
+</html>

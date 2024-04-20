@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            color: #4CAF50;
+            background-color: white;
+            transition: background-color 0.3s, color 0.3s;
+            margin: 10px;
+        }
+        .button:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Choose a Service</h1>
+    <form action="{% url 'serviceList' %}" method="get">
+        <button type="submit" class="button" name="service" value="solar_panel_installation">Solar Panel Installation</button>
+        <button type="submit" class="button" name="service" value="interior_design">Interior Design</button>
+        <button type="submit" class="button" name="service" value="landscaping">Landscaping</button>
+    </form>    
+    {% if user.is_authenticated %}
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+        </li>
+    </ul>
+    {% endif %}
+</body>
+</html>

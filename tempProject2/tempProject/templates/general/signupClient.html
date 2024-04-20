@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form class="SignUpClient" action="{% url 'signupClient' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{new_form.as_p}}
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="user_email" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="user_pass" required>
+        </div>
+        <div>
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+        </div>
+        <div>
+            <label for="company_phNo">Phone No:</label>
+            <input type="text" id="company_phNo" name="user_phNo" required>
+        </div>
+        <div>
+            <label for="user_cmpName">Company Name:</label>
+            <input type="text" id="user_cmpName" name="user_cmpName" required>
+        </div>
+        <div>
+            <label for="owner_name">Owner Name:</label>
+            <input type="text" id="owner_name" name="user_ownName" required>
+        </div>
+        <div>
+            <label for="office_address">Office Address:</label>
+            <input type="text" id="office_address" name="user_offAdr" required>
+        </div>
+        <div>
+            <label for="gst_no">GST No:</label>
+            <input type="text" id="gst_no" name="user_gst" required>
+        </div>
+        <div>
+            <label for="files">Upload Files:</label>
+            <input type="file" id="files" name="files" multiple>
+        </div>
+        
+        <div>
+            <label for="pan">Enter PAN Card Number:</label><br>
+            <input type="text" id="pan" name="user_pan" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" title="Enter a valid PAN card number" required><br>
+            <small>Example: ABCDE1234F</small><br><br>
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="error">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Form</title>
+</head>
+<body>
+    <div class="container">
+        <!-- New Section Form -->
+        <div id="new-section-form">
+            <h2>Add New Section</h2>
+            <form action="{% url 'add_section' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="type">Section Type:</label><br>
+                <input type="text" id="type" name="type" required><br>
+                <label for="title">Title:</label><br>
+                <input type="text" id="title" name="title" required><br>
+                <label for="rate">Rate per Employee:</label><br>
+                <input type="number" id="rate" name="rate" step="0.01" required><br>
+                <label for="images">Upload Images:</label><br>
+                <input type="file" id="images" name="images" multiple><br>
+                <label for="employeeCount">Employee Count:</label><br>
+                <input type="number" id="employeeCount" name="employeeCount" required><br>
+                <label for="description">Description:</label><br>
+                <textarea id="description" name="description" rows="4" required></textarea><br>
+                <label for="employeePerArea">Employees per Area:</label><br>
+                <input type="number" id="employeePerArea" name="employeePerArea" required><br>
+                <label for="timeToComplete">Time to Complete Area:</label><br>
+                <input type="number" id="timeToComplete" name="timeToComplete" required><br>
+                <input type="submit" value="Create Section">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
