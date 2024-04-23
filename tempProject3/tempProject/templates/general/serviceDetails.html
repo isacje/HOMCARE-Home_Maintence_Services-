@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List of Services</title>
+</head>
+<body>
+
+<div class="detail">
+    <h2>{{ details.title }}</h2>
+    <h2>{{ details.description }}</h2>
+    <p>Rate: {{ details.rate }}</p>
+    {% for image_obj in image_objs %}
+        {% if image_obj.ID == details.sectionID %}
+            <img src="{{ image_obj.field_name.url }}" alt="User Image">
+        {% endif %}
+    {% endfor %}
+    <form method="GET" action="{% url 'book' details.sectionID.clientID|stringformat:'s' %}">
+        {% csrf_token %}
+        <button type="submit">Book Service</button> 
+    </form>
+</div>
+
+</body>
+</html>

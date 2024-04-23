@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List of Services</title>
+</head>
+<body>
+<h1>Booked Services</h1>
+{% for track in tracks %}
+<div class="track">
+    <p>Company Name: {{ track.companyName }}</p>
+    <p>Email: {{ track.email }}</p>
+    <p>Phone No: {{ track.phoneNo }}</p>
+    <p>Service Address: {{ track.officeAddress }}</p>
+    <p>Start Date: {{ track.startDate }}</p>
+    <p>End Date: {{ track.endDate }}</p>
+    <p>Service Type: {{ track.type }}</p>
+    <p>Status:{{ track.status }}</p>
+</div>
+{% endfor %}
+
+</body>
+</html>

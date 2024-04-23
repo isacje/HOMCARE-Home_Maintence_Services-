@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Requests</title>
+</head>
+<body>
+  {% for request in requests %}
+  <div class="request">
+      <p>Customer Name: {{ request.username }}</p>
+      <p>Email: {{ request.email }}</p>
+      <p>Phone No: {{ request.phoneNo }}</p>
+      <p>Customer Address: {{ request.address }}</p>
+      <p>Price Paid: {{ request.price }}</p>
+      <form action="{% url 'status' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Completed</button>
+        <input type="hidden" name="providerID" value='{{ request.ID.clientID }}'> 
+        <input type="hidden" name="username" value='{{ request.username }}'> 
+        <input type="hidden" id="startDate" value='{{ request.startDate }}'>
+        <!-- Added an input field to store the formatted date -->
+        <input type="hidden" name="currentDate"> 
+      </form>
+  </div>
+  {% endfor %}
+  {% if user.is_authenticated %}
+    <ul class="navbar-nav mr-auto">
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+      </li>
+    </ul>
+  {% endif %}
+
+  <script>
+    // Get the value of startDate from the hidden input field
+    var startDate = document.getElementById('startDate').value;
+    // Create a Date object from the retrieved date string
+    var cDate = new Date(startDate);
+    // Format the date as yyyy-mm-dd
+    var formattedCurrentDate = cDate.getFullYear() + '-' + ('0' + (cDate.getMonth() + 1)).slice(-2) + '-' + ('0' + cDate.getDate()).slice(-2);
+    // Store the formatted date in the hidden input field
+    document.querySelector('input[name="currentDate"]').value = formattedCurrentDate;
+  </script>
+</body>
+</html>
