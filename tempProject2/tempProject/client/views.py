@@ -1,18 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 # from django.views import View
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib import messages
-from .models import ServiceProvider,Client,fileUpload,Section,serviceList,NewUser
+from .models import ServiceProvider,Client,fileUpload,Section,serviceList,NewUser,customerList,booked
 import uuid
-from django.core.files.storage import FileSystemStorage
 import pip._vendor.requests
-from django.http import JsonResponse
-from uuid import UUID
 from django.contrib import messages
-# from .models import Section
-from django.contrib.auth.decorators import login_required
-
 
 def user_services(request):
     return render(request,'general\services.html')
@@ -55,13 +48,13 @@ def user_signupUser(request):#customer
             return render(request, 'general\signupUser.html')
         user_obj = Client.objects.create(username=username,email=user_email,password=user_pswd,phoneNo=user_phNo,address=user_adr,userType=userType)
         user_obj.set_password(user_pswd)
-        # user_obj.username = username
         user_obj.save()
         user_auth = authenticate(username=username, password=user_pswd)
         ##
         if user_auth:
             print("Hi 1")
             login(request, user_auth)
+            request.session.save()
             return redirect('services')
         print("Hi 2")
         return render(request, 'general\signupUser.html')
@@ -69,7 +62,6 @@ def user_signupUser(request):#customer
 def user_signupClient(request):#Service provider
     print("hellooww", request)
     if request.method == 'POST':
-        # clientID=str(uuid.uuid4())
         user_email = request.POST.get('user_email')
         username = request.POST.get('username')
         user_pswd = request.POST.get('user_pass')
@@ -119,6 +111,7 @@ def user_signupClient(request):#Service provider
             ##
             if user_auth:
                 login(request, user_auth)    
+                request.session.save()
                 return redirect('register')
         else:
             error_message = 'Invalid Pancard.'
@@ -128,6 +121,11 @@ def user_signupClient(request):#Service provider
 
 
 def user_login(request):
+    if request.user.is_authenticated:
+        if(request.user.userType=="User"):
+            return render(request, 'general\services.html')
+        else:
+            return render(request, 'general\customerRequest.html')    
     return render(request, 'general\login.html')
 
 
@@ -148,6 +146,7 @@ def user_authenticate(request):
         
         try:
             type_obj=NewUser.objects.get(username=user_email)
+            print(type_obj.userType)
             if(type_obj.userType=="Service Provider"):
                 user_auth = authenticate(username=user_email, password=user_pswd)
                 login(request, user_auth)
@@ -155,6 +154,7 @@ def user_authenticate(request):
             elif(type_obj.userType=="User"):
                 user_auth = authenticate(username=user_email, password=user_pswd)
                 login(request, user_auth)
+                request.session.save()
                 return redirect('services')
         except:
             messages.error(request, 'Something is wrong.')
@@ -204,7 +204,9 @@ def add_section(request):
                     file_obj.save()
             # Redirect to a new page or the same page
             serviceListFn(title,rate,service_provider,type)
-            return redirect('customerRequest') # Adjust 'sections' to the name of your view or URL
+            request_obj=customerList.objects.filter(ID=service_provider.clientID)
+            print(request_obj)
+            return render(request,'general\customerRequest.html',{'requests':request_obj})
         else:
             # User is anonymous, handle appropriately (redirect to login page, show error message, etc.)
             return redirect('register')
@@ -215,8 +217,6 @@ def add_section(request):
 def serviceListFn(title,rate,id,type):
       service_obj=serviceList.objects.create(title=title,rate=rate,type=type,ID=id)
       service_obj.save()
-#     image_objs=fileUpload.objects.filter(ClientID=id)
-#     return render(request,'serviceList.html', {'sections': service_obj},{'image_objs': image_objs})
     
 
 def service_list(request):
@@ -225,37 +225,62 @@ def service_list(request):
         service_objects = serviceList.objects.filter(type=service_type)
         image_objs=fileUpload.objects.all()
         return render(request, 'general\serviceList.html', {'sections': service_objects,'image_objs': image_objs})
-        
+    else:
+        current_user=request.user
+        currentClient = Client.objects.get(email=current_user.email)
+        book_obj=booked.objects.filter(ID=currentClient)
+        return render(request,'general\\booked.html', {'tracks':book_obj})
+    
 def service_details(request,section_id):
     section_obj = get_object_or_404(Section, sectionID__clientID=section_id)
     image_objs = fileUpload.objects.all()
-    return render(request, 'general/serviceDetails.html', {'details': section_obj, 'image_objs': image_objs})
+    return render(request, 'general\serviceDetails.html', {'details': section_obj, 'image_objs': image_objs})
 
 def book_now(request,section_id):
     print("hellooo",section_id)
     pay_obj=get_object_or_404(Section, sectionID__clientID=section_id)
-    return render(request,'general/payment.html',{'pay':pay_obj})
+    return render(request,'general\payment.html',{'pay':pay_obj})
             
-def track(request):
-    return render(request,'track.html')            
+def track(request,section_id):
+    if request.method == 'POST':
+        price=request.POST.get('price')
+        currentDate=request.POST.get('currentDate')
+        endDate=request.POST.get('endDate')
+        print(currentDate)
+        print(price)
+        
+        current_user=request.user
+        service_obj=ServiceProvider.objects.get(clientID=section_id)
+        currentClient = Client.objects.get(email=current_user.email)
+        username=currentClient.username
+        email=currentClient.email
+        phone=currentClient.phoneNo
+        address=currentClient.address
+        bookedCustomer=customerList.objects.create(customerID=uuid.uuid4(),ID=service_obj,username=username,email=email,phoneNo=phone,address=address,price=price)
+        bookedCustomer.save()
+        
+        companyName=service_obj.companyName
+        serviceMail=service_obj.email
+        servicePhone=service_obj.phoneNo
+        serviceAddr=service_obj.officeAddress
+        
+        track_obj=get_object_or_404(Section, sectionID__clientID=section_id)
+        serviceType=track_obj.sectionType
+        trackProvider=booked.objects.create(bookedID=uuid.uuid4(),ID=currentClient,companyName=companyName,email=serviceMail,phoneNo=servicePhone,officeAddress=serviceAddr,type=serviceType,startDate=currentDate,endDate=endDate,status='Pending')
+        trackProvider.save()
+        
+        book_obj=booked.objects.filter(ID=currentClient)
+        
+        print(track_obj.timeToComplete)
+        return render(request,'general\\booked.html', {'tracks':book_obj})            
 
 def register(request):
     return render(request,'general\individualService.html')
 
 def customer_request(request):
-    return render(request,'general\customerRequest.html')
+    current_user=request.user
+    service_obj=ServiceProvider.objects.get(email=current_user.email)
+    request_obj=customerList.objects.filter(ID=service_obj.clientID)
+    return render(request,'general\customerRequest.html',{'requests':request_obj})
 
-# @login_required
-# def add_section(request):
-#     if request.method == 'POST':
-#         # Check if the user is authenticated before accessing user-specific attributes
-#         if request.user.is_authenticated:
-#             user_email = request.user.email
-#             # Continue with your code logic...
-#         else:
-#             # Handle the case where the user is not authenticated
-#             # You can redirect the user to a login page or display an error message
-#             return HttpResponse("Unauthorized", status=401)
-#     else:
-#         # Handle GET request or other cases
-#         pass
+

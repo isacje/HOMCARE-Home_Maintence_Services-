@@ -49,7 +49,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-   
 ]
 
 ROOT_URLCONF = 'tempProject.urls'
@@ -132,13 +131,4 @@ MEDIA_URL = 'C:/Users/Dell/Documents/temp/tempProject/media/'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Database-backed sessions
 
-
-
-# AUTHENTICATION_BACKENDS = [
-#     'django.contrib.auth.backends.ModelBackend',
-#     # Add any other authentication backends you want to use here
-# ]
-
-# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-# SESSION_COOKIE_AGE = 0  # Set the session cookie age to 0 to expire when the browser is closed
+SESSION_EXPIRE_AT_BROWSER_CLOSE=True

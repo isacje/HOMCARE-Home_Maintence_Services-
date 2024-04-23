@@ -19,7 +19,7 @@ urlpatterns = [
 	path('serviceList',views.service_list,name="serviceList"),
 	path('service-details/<uuid:section_id>/', views.service_details, name='service_details'),
 	path('book/<uuid:section_id>/',views.book_now,name="book"),
-	path('track',views.track,name="track"),
+	path('track/<uuid:section_id>/',views.track,name="track"),
 	path('register',views.register,name="register"),
 	path('customerRequest',views.customer_request,name="customerRequest"),
 ]

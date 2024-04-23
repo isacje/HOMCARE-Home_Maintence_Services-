@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,9 +33,11 @@
 <body>
     <h1>Choose a Service</h1>
     <form action="{% url 'serviceList' %}" method="get">
+        {% csrf_token %}
         <button type="submit" class="button" name="service" value="solar_panel_installation">Solar Panel Installation</button>
         <button type="submit" class="button" name="service" value="interior_design">Interior Design</button>
         <button type="submit" class="button" name="service" value="landscaping">Landscaping</button>
+        <button type="submit" class="button" name="book" value="booked">Booked</button>
     </form>    
     {% if user.is_authenticated %}
       <ul class="navbar-nav mr-auto">
@@ -42,6 +45,10 @@
           <a class="nav-link" href="{% url 'logout' %}">Log out</a>
         </li>
     </ul>
-    {% endif %}
+    {% else %}
+        <script>
+            window.location.href = "{% url 'logout' %}";
+        </script>
+    {%endif%}
 </body>
 </html>

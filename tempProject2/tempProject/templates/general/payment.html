@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
             return; // Exit the function
         }
         // Get the payment per area and rate from the server-side (you may need to fetch these values using AJAX)
-        var employeePerArea = parseFloat(document.getElementById('epa').value);; // Get employeePerArea from the Section object
+        var employeePerArea = parseFloat(document.getElementById('epa').value); // Get employeePerArea from the Section object
         var rate = parseFloat(document.getElementById('rate').value); // Get rate from the Section object
         
         // Calculate the payment
@@ -24,26 +25,66 @@
         
         // Display the payment dynamically
         document.getElementById('price').innerText = payment.toFixed(2); // Round to 2 decimal places
+        
+        var priceElement = document.getElementById('price');
+        var priceText = priceElement.textContent;
+        var price = parseFloat(priceText);
+        var hiddenInput = document.querySelector('input[type="hidden"][name="price"]');
+        hiddenInput.value = price;
     }
+    function calculateEndate() {
+        // Create a new Date object for the current date
+        var currentDate = new Date();
 
+        // Get the day, month, and year of the current date
+        var day = currentDate.getDate();
+        var month = currentDate.getMonth() + 1; // Months are zero-based
+        var year = currentDate.getFullYear();
+
+        var formattedCurrentDate = currentDate.getFullYear()+'-'+(currentDate.getMonth() + 1)+'-'+currentDate.getDate();
+
+        // Get the time to complete value from the hidden input field
+        var timeToComplete = parseFloat(document.getElementById('timeComplete').value);
+
+        // Calculate the end date by adding time to complete to the current date
+        var endDate = new Date(year, month - 1, day + timeToComplete);
+        // Adjust month and year if necessary
+        while (endDate.getMonth() !== month - 1 || endDate.getFullYear() !== year) {
+            // Adjust the end date by subtracting a day until the month and year match
+            endDate.setDate(endDate.getDate() - 1);
+        }
+        // Format the end date as desired (e.g., dd/mm/yyyy)
+        var formattedEndDate = endDate.getFullYear()+'-'+(endDate.getMonth() + 1)+'-'+endDate.getDate();
+
+        // Display the formatted end date in the element with id "end-date"
+        var cDate = document.querySelector('input[type="hidden"][name="currentDate"]');
+        cDate.value=formattedCurrentDate
+        var eDate = document.querySelector('input[type="hidden"][name="endDate"]');
+        eDate.value=formattedEndDate
+    }
     // Function to handle input event on the area input field
     function handleInput() {
         // Calculate payment dynamically when the user inputs a value
         calculatePayment();
     }
+    window.onload = calculateEndate;
 </script>
 </head>
 <body>
 <h1>Price Calculator</h1>
-<form id="areaForm" action="{% url 'track' %}">
+<form id="areaForm" action="{% url 'track' pay.sectionID.clientID|stringformat:'s'%}" method="post">
     {% csrf_token %}
     <label for="area">Enter Area (in square feet):</label><br>
     <input type="hidden" id="epa" name="payment" value="{{ pay.employeePerArea }}">
     <input type="hidden" id="rate" name="payment" value="{{ pay.rate }}">
-    <input type="number" id="area" name="area" oninput="handleInput()"><br>
+    <input type="hidden" id="timeComplete" name="track" value="{{ pay.timeToComplete }}">
+    <input type="number"  placeholder="area" id="area" name="area_given" oninput="handleInput()"><br>
+    <input type="hidden" name="currentDate" name="track" >
+    <input type="hidden" name="endDate" name="track" >
     <label for="price">Price:</label><br>
     <span id="price"></span><br>
-    <input type="submit" name="Submit">
+    <input type="hidden" name="price" >
+    <input type="submit" value="Book Now" name="Book Now">
 </form>
 <label id="priceLabel"></label>
 </body>

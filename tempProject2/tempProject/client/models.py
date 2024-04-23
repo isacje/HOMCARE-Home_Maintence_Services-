@@ -21,12 +21,6 @@ class CustomAccountManager(BaseUserManager):
     def create_superuser(self, username, email, password, **extra_fields):
         if not email:
             raise ValueError(_('You must provide an email.'))
-        # if not username:
-        #     raise ValueError(_('You must provide an username.'))
-        # if not password:
-        #     raise ValueError(_('You must provide an password.'))
-        # extra_fields.setdefault('is_staff', True)
-        # extra_fields.setdefault('is_superuser', True)
         user = self.create_user(
             username=username,
             email=email,
@@ -57,11 +51,6 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.username
     
-    # def __init__(self,username,email,password,phoneNo) -> None:
-    #     self.username=username
-    #     self.email=email
-    #     self.password=password
-    #     self.phoneNo=phoneNo
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
         # Simplest possible answer: Yes, always
@@ -80,24 +69,13 @@ class ServiceProvider(NewUser):
     gstNo=models.CharField(max_length=30,unique=True)
     pan=models.CharField(max_length=10,unique=True,default=None)
     panName=models.CharField(max_length=200,unique=True,default=None)
-    #file = models.FileField(upload_to='C:\Users\Dell\Documents\temp\tempProject\files')
-    
-    # def __init__(self,username,email,password,phoneNo,companyName,ownerName,officeAddress,gstNo) -> None:
-    #     super().__init__(self,username,email,password,phoneNo)
-    #     self.clientID = uuid.uuid4()
-    #     self.companyName = companyName
-    #     self.ownerName = ownerName
-    #     self.officeAddress = officeAddress
-    #     self.gstNo = gstNo
+
         
         
 class Client(NewUser):
     userID=models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True)
     address=models.CharField(max_length=50)
-    # def __init__(self,username,email,password,phoneNo,address) -> None:
-    #     super().__init__(self,username,email,password,phoneNo)
-    #     self.userID = uuid.uuid4()
-    #     self.address=address
+
 
 class fileUpload(models.Model):
     fileID=models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True)
@@ -106,7 +84,6 @@ class fileUpload(models.Model):
     
 
 class Section(models.Model):
-    # ID=models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True)
     sectionID=models.ForeignKey(ServiceProvider,to_field="clientID",on_delete=models.CASCADE,primary_key=True)
     title=models.CharField(max_length=50)    
     rate=models.DecimalField(max_digits=10,decimal_places=2)
@@ -115,16 +92,31 @@ class Section(models.Model):
     employeePerArea=models.DecimalField(max_digits=10,decimal_places=2)
     timeToComplete=models.DecimalField(max_digits=10,decimal_places=2)
     sectionType=models.CharField(max_length=20)
-    
-# class providerRegister():
-#     serviceTitle=models.CharField(max_length=50)
-#     rate=models.IntegerField(max_length=10)
-#     description=models.CharField(max_length=350)
-#     images = models.ImageField(upload_to='C:/Users/Dell/Documents/temp/tempProject/media', max_length=254)
-#     employeeCount=models.IntegerField(max_length=10)
 
 class serviceList(models.Model):
     ID=models.ForeignKey(ServiceProvider,to_field="clientID",on_delete=models.CASCADE,primary_key=True)
     title=models.CharField(max_length=50)
     rate=models.DecimalField(max_digits=10,decimal_places=2)
     type=models.CharField(max_length=20)
+   
+class customerList(models.Model):
+    customerID=models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True)
+    ID=models.ForeignKey(ServiceProvider,to_field="clientID",on_delete=models.CASCADE)
+    email = models.EmailField(_('email address'), null=True)
+    username = models.CharField(max_length=150)
+    phoneNo=models.CharField(max_length=20)
+    address=models.CharField(max_length=50)
+    price=models.DecimalField(max_digits=10,decimal_places=2)
+    
+class booked(models.Model):
+    bookedID=models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True)
+    ID=models.ForeignKey(Client,to_field="userID",on_delete=models.CASCADE)
+    companyName=models.CharField(max_length=50)   
+    email = models.EmailField(_('email address'),null=True)
+    phoneNo=models.CharField(max_length=20)   
+    type=models.CharField(max_length=20)
+    officeAddress=models.CharField(max_length=50)
+    startDate=models.DateField()
+    endDate=models.DateField()
+    status=models.CharField(max_length=20)
+        
