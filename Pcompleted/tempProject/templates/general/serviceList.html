@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="static/style/home.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Details</title>
+  <style>
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 5px solid #ccc;
+      border-radius: 5px;
+      display: flex; /* Use flexbox */
+      align-items: center; /* Center vertically */
+    }
+    .left-section {
+      flex: 1; /* Take up remaining space */
+      text-align: left; /* Align text to the left */
+      margin-right: 20px; /* Add some space between left and right sections */
+    }
+    .company-title {
+      font-size: 30px;
+      margin-bottom: 10px;
+      max-width: auto; /* Limit the width */
+      white-space: nowrap; /* Prevent wrapping */
+      overflow: hidden; /* Hide overflow text */
+      text-overflow: ellipsis; /* Show ellipsis for overflow text */
+    }
+    .rate {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+    .right-section {
+      flex: 1; /* Take up remaining space */
+      text-align: center; /* Align content to the center */
+    }
+    .image {
+      max-width: 100%;
+      height: 200px;
+      width: 200%;
+    }
+  </style>
+</head>
+<body>
+  <header id="navbar">
+    <nav>
+        <ul class="nav-ul">
+            <img id="logo" src="static/images/home_service_icon1.svg">
+            <li id="name">homcare.</li>
+            <li class="nav-li">
+                <p><a href="#" id="bookingsLink">Bookings</a></p>
+                <form id="bookingForm" action="{% url 'serviceList' %}" method="get" style="display: none;">
+                    {% csrf_token %}
+                    <input type="hidden" name="book" value="booked">
+                </form>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-li"><p><a href="{% url 'logout' %}">logout</a></p></li>
+            <!-- <li class="nav-li"><p><a href="">Bookings</a></p></li> -->
+            {% endif %}
+         
+        </ul>
+    </nav>
+</header>
+<br>
+<br> 
+<h1>List of Services</h1>
+
+{% for section in sections %}
+<div class="container">
+    <div class="left-section">
+      <div class="company-title">{{ section.title }}</div>
+      <div class="rate">Rate: {{ section.rate }}</div>
+      <form method="GET" action="{% url 'service_details' section.ID.clientID|stringformat:'s' %}">
+        
+        <button type="submit" class="button">Get Details</button>
+    </form>
+    </div>
+    <div class="right-section">
+        {% for image_obj in image_objs %}
+            {% if image_obj.ID == section.ID %}
+                <img src="{{ image_obj.field_name.url }}" alt="User Image" class="image">
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+    
+</div>
+{% endfor %} 
+</body>
+<script>
+  document.getElementById('bookingsLink').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default behavior of the hyperlink
+        document.getElementById('bookingForm').submit(); // Submit the form
+    });
+</script>
+</html>
